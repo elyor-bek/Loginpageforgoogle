@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Logorgoogle.Data;
 using Logorgoogle.Areas.Identity.Data;
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("LogorgoogleContextConnection") ?? throw new InvalidOperationException("Connection string 'LogorgoogleContextConnection' not found.");
 
-builder.Services.AddDbContext<LogorgoogleContext>(options => options.UseSqlServer(connectionString));
-
+builder.Services.AddDbContext<LogorgoogleContext>(options =>
+                options.UseNpgsql(builder.Configuration.GetConnectionString("LogorgoogleContextConnection")));
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services.AddDefaultIdentity<LogorgoogleUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<LogorgoogleContext>();
 
 // Add services to the container.
