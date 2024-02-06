@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Logorgoogle.Migrations
 {
     [DbContext(typeof(LogorgoogleContext))]
-    [Migration("20240131065441_INitialDb")]
-    partial class INitialDb
+    [Migration("20240201042639_Initail")]
+    partial class Initail
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
