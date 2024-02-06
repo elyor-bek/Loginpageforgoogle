@@ -11,11 +11,11 @@ builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 {
     googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
     googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-}).AddFacebook(options=>
+}).AddFacebook(options =>
 {
     options.AppId = configuration["Authentication:Facebook:AppId"];
     options.AppSecret = configuration["Authentication:Facebook:AppSecret"];
-}).AddGitHub(options=>
+});/*.AddGitHub(options=>
 {
     options.ClientId = configuration["github:clientId"];//"Iv1.8438b6a780a0e818";
     options.ClientSecret = configuration["github:clientSecret"];//"813747";
@@ -30,7 +30,7 @@ builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 
         return Task.CompletedTask;
     };
-});
+});*/
 builder.Services.AddDbContext<LogorgoogleContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("LogorgoogleContextConnection")));
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
