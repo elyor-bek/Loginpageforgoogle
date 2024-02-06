@@ -1,10 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Logorgoogle.Data;
 using Logorgoogle.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity;
-
-using Microsoft.AspNetCore.Authentication.Facebook;
-using System.Security.Claims;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 builder.Services.AddAuthentication().AddGoogle(googleOptions =>
@@ -15,22 +11,7 @@ builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 {
     options.AppId = configuration["Authentication:Facebook:AppId"];
     options.AppSecret = configuration["Authentication:Facebook:AppSecret"];
-});/*.AddGitHub(options=>
-{
-    options.ClientId = configuration["github:clientId"];//"Iv1.8438b6a780a0e818";
-    options.ClientSecret = configuration["github:clientSecret"];//"813747";
-    options.CallbackPath = "/signin-github";
-    options.Scope.Add("read:user");
-    options.Events.OnCreatingTicket += context =>
-    {
-        if (context.AccessToken is { })
-        {
-            context.Identity?.AddClaim(new Claim("access_token", context.AccessToken));
-        }
-
-        return Task.CompletedTask;
-    };
-});*/
+});
 builder.Services.AddDbContext<LogorgoogleContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("LogorgoogleContextConnection")));
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
